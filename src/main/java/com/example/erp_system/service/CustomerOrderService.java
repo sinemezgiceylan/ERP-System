@@ -22,6 +22,8 @@ public class CustomerOrderService {
     @Autowired
     ProductService productService;
 
+    // Yeni şipariş oluşturuldu.
+
     public boolean createCustomerOrder(CustomerEntity customer, List<ProductEntity> productEntityList) {
         if (customer == null || productEntityList == null) {
             return false;
@@ -46,6 +48,8 @@ public class CustomerOrderService {
         return customerOrderRepository.findByUuid(uuid);
     }
 
+    // UUID' ye göre sipariş güncellendi.
+
     public boolean updateCustomerOrder(UUID uuid, CustomerOrderEntity customerOrderEntity) {
         if (uuid == null || customerOrderEntity == null) {
             return false;
@@ -64,6 +68,8 @@ public class CustomerOrderService {
         }
     }
 
+    // UUID'ye göre sipariş silindi.
+
     public boolean deleteCustomerOrder(UUID uuid) {
         if (uuid == null) {
             return false;
@@ -72,6 +78,8 @@ public class CustomerOrderService {
             return true;
         }
     }
+
+    // Sipariş için ürün eklemesi yapıldı.
 
     public boolean addProductToCustomerOrder(UUID orderUuid, UUID productUuid) {
         if (orderUuid == null || productUuid == null || productRepository.findByUuid(productUuid).getOrderCount() == 0)
@@ -95,6 +103,8 @@ public class CustomerOrderService {
         }
     }
 
+    // Siparişin toplam tutarı hesaplandı.
+
     public void calculateTotalPrice(UUID uuid) {
         CustomerOrderEntity customerOrderEntity = customerOrderRepository.findByUuid(uuid);
         BigDecimal totalPrice = BigDecimal.ZERO;
@@ -106,6 +116,8 @@ public class CustomerOrderService {
         customerOrderRepository.save(customerOrderEntity);
     }
 
+    // Sipariş durumu incelendi.
+
     public CustomerOrderEntity controlOrderStatus(UUID customerOrderUuid) {
         CustomerOrderEntity customerOrder = customerOrderRepository.findByUuid(customerOrderUuid);
         if (customerOrder == null)
@@ -115,6 +127,7 @@ public class CustomerOrderService {
                 if (productEntity.getStockCount() < productEntity.getOrderCount()) {
                     customerOrder.setStatus(StatusEnum.REJECTED);
                     customerOrderRepository.save(customerOrder);
+                    return customerOrder;
                 } else {
                     customerOrder.setStatus(StatusEnum.APPROVED);
                     productEntity.setStockCount(productEntity.getStockCount() - productEntity.getOrderCount());

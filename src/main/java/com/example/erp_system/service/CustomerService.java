@@ -13,7 +13,7 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    // Yeni müsteri yaratıldı.
+    // Yeni müsteri oluşturuldu.
 
     public boolean createCustomer(String name, String surname, String email, String tc) {
         if (name == null || surname == null || email == null || tc == null) {

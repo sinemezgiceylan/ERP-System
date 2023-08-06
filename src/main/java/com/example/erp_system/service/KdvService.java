@@ -15,7 +15,7 @@ public class KdvService {
     KdvRepository kdvRepository;
 
 
-    // Kdv yaratıldı.
+    // Kdv oluşturuldu.
     public boolean createKdv(String name, BigDecimal percent) {
         if (name == null || percent == null) {
             return false;
@@ -38,6 +38,7 @@ public class KdvService {
     }
 
     // UUID'ye göre kdv güncellendi.
+
     public boolean updateKdv(UUID uuid, KdvEntity kdvEntity) {
         if (uuid == null || kdvEntity == null) {
             return false;
@@ -54,6 +55,8 @@ public class KdvService {
             }
         }
     }
+
+    // UUID'ye göre kdv silindi.
 
     public boolean deleteKdv(UUID uuid) {
         if (uuid == null) {

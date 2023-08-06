@@ -14,7 +14,7 @@ import java.util.List;
 @AttributeOverride(name = "uuid", column = @Column(name = "customer_order_uuid"))
 public class CustomerOrderEntity extends BaseEntity{
 
-    @OneToOne // One to one
+    @OneToOne
     @JoinColumn(name = "customer_id", unique = false)
     private CustomerEntity customer;
 

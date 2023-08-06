@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("customerOrder")
+@RequestMapping("customer-order")
 public class CustomerOrderController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class CustomerOrderController {
         return new ResponseEntity<>(customerOrderService.getByUuid(uuid), HttpStatus.OK);
     }
 
-    @GetMapping("getByStatus/{status}")
+    @GetMapping("get-by-status/{status}")
     public ResponseEntity<List<CustomerOrderEntity>> getByStatus(@PathVariable String status) {
         return new ResponseEntity<>(customerOrderService.getByStatus(StatusEnum.fromString(status)), HttpStatus.OK);
     }
